@@ -88,7 +88,11 @@ export default function CrearVisita() {
 
       if (error) throw error;
 
-      trackEvent("Visitas", "Crear visita", clientes.find(c => c.id === clienteId)?.nombre);
+      //evento
+      trackEvent("crear_visita", {
+        cliente: clientes.find(c => c.id === clienteId)?.nombre
+      });
+
 
       toast.success("Visita creada correctamente");
 

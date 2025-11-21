@@ -103,16 +103,21 @@ export default function VisitasList() {
                   {/* Botón PDF */}
                   <td>
                     {v.estado === "finalizada" && (
-                      <button
-                        className="px-3 py-1 bg-blue-600 text-white rounded"
-                        onClick={async () => {
-                           trackEvent("reportes", "generar_pdf", v.clienteNombre);
-                           await generarPDFVisita(v);
-                      }}
-                    >
-                      PDF
-                      </button>
-                    )}
+                      
+  <button
+    className="px-3 py-1 bg-blue-600 text-white rounded"
+    onClick={async () => {
+      trackEvent("generar_pdf_visita", {
+        cliente: v.clienteNombre,
+        visita_id: v.id
+      });
+      await generarPDFVisita(v);
+    }}
+  >
+    PDF
+  </button>
+)}
+
                   </td>
                 </tr>
               ))
