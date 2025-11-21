@@ -35,7 +35,7 @@ export default function FormularioReporte({
     if (reporteError) throw reporteError;
 
     // evento enviar reporte
-    trackEvent("Reportes", "Enviar reporte", visita.cliente?.nombre);
+    trackEvent("Reportes", "Enviar reporte", visita.clienteNombre);
 
     // 2. Cambiar estado de visita a "finalizada"
     const { error: visitaError } = await supabase
@@ -44,7 +44,7 @@ export default function FormularioReporte({
       .eq("id", visita.id);
 
     // evento finalizar visita
-    trackEvent("Visitas", "Finalizar visita", visita.cliente?.nombre);
+    trackEvent("Visitas", "Finalizar visita", visita.clienteNnombre);
 
     if (visitaError) throw visitaError;
 

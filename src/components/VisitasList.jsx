@@ -106,7 +106,7 @@ export default function VisitasList() {
                       <button
                         className="px-3 py-1 bg-blue-600 text-white rounded"
                         onClick={async () => {
-                          trackEvent("Reportes", "Generar PDF", v.cliente?.nombre);
+                          trackEvent("Reportes", "Generar PDF", v.clienteNnombre);
                           await generarPDFVisita(v);
                         }}
                        >
