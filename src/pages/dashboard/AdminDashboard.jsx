@@ -1,12 +1,12 @@
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { supabase } from "../../lib/supabaseClient"; // 👈 Asegúrate que esto apunta a tu cliente
+import { supabase } from "../../lib/supabaseClient"; // 
 import UserList from "../../components/UserList";
 
 export default function AdminDashboard() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // 🔹 Función para cerrar sesión
+  //  Función para cerrar sesión
   const handleLogout = async () => {
     await supabase.auth.signOut(); // Cierra sesión en Supabase
 
@@ -19,7 +19,7 @@ export default function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* 🔹 Barra superior */}
+      {/*  Barra superior */}
       <header className="bg-green-700 text-white p-4 flex justify-between items-center">
         <h1 className="text-xl font-bold">Panel del Administrador</h1>
 
@@ -33,7 +33,7 @@ export default function AdminDashboard() {
             Crear Usuario
           </Link>
 
-          {/* 🔹 BOTÓN CERRAR SESIÓN */}
+          {/*  BOTÓN CERRAR SESIÓN */}
           <button
             onClick={handleLogout}
             className="ml-4 bg-red-500 hover:bg-red-600 px-3 py-1.5 rounded text-white"
@@ -43,7 +43,7 @@ export default function AdminDashboard() {
         </nav>
       </header>
 
-      {/* 🔹 Contenedor principal */}
+      {/*  Contenedor principal */}
       <main className="p-8">
         {location.pathname === "/admin/dashboard" ? (
           <UserList />

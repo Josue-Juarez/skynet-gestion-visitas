@@ -12,16 +12,16 @@ export default function CreateUser() {
   const generarPassword = () => {
     const randomPass = Math.random().toString(36).slice(-10);
     setPassword(randomPass);
-    toast.success("🔐 Contraseña generada correctamente");
+    toast.success(" Contraseña generada correctamente");
   };
 
   const copiarPassword = () => {
     if (!password) return toast.error("Primero genera una contraseña");
     navigator.clipboard.writeText(password);
-    toast.success("📋 Contraseña copiada");
+    toast.success(" Contraseña copiada");
   };
 
-  // 🟢 MAPEO de roles a ID según tu tabla
+  //  MAPEO de roles a ID según la tabla
   const mapRolToId = {
     supervisor: 2,
     tecnico: 3,
@@ -32,17 +32,17 @@ export default function CreateUser() {
     setLoading(true);
 
     if (!correo || !nombre || !rol || !password) {
-      toast.error("⚠️ Todos los campos son obligatorios");
+      toast.error(" Todos los campos son obligatorios");
       setLoading(false);
       return;
     }
 
     try {
-      // 🔐 Obtener token del usuario actual (si la función requiere autenticación)
+      //  Obtener token del usuario actual (si la función requiere autenticación)
       const { data: sessionData } = await supabase.auth.getSession();
       const token = sessionData?.session?.access_token;
 
-      // 🚀 Llamar a la Edge Function crear-usuario
+      //  Llamar a la Edge Function crear-usuario
       const res = await fetch(
         "https://ycmldismmvfzgbciuzvx.supabase.co/functions/v1/crear-usuario",
         {
@@ -64,7 +64,7 @@ export default function CreateUser() {
 
       if (!res.ok) throw new Error(data.error);
 
-      toast.success("✅ Usuario creado correctamente");
+      toast.success(" Usuario creado correctamente");
 
       // Limpiar campos
       setNombre("");
@@ -74,7 +74,7 @@ export default function CreateUser() {
 
     } catch (err) {
       console.error(err);
-      toast.error(`❌ Error: ${err.message}`);
+      toast.error(` Error: ${err.message}`);
     } finally {
       setLoading(false);
     }

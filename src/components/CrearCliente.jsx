@@ -35,7 +35,7 @@ export default function CrearCliente() {
   const handleCrearCliente = async (e) => {
     e.preventDefault();
     
-    // ✅ Validar que todos los campos obligatorios estén completos
+    //  Validar que todos los campos obligatorios estén completos
     if (!nombre || !correo || !direccion || !telefono || !latitud || !longitud) {
       return toast.error("Completa todos los campos obligatorios y selecciona la ubicación");
     }
@@ -54,7 +54,7 @@ export default function CrearCliente() {
       const { error } = await supabase.from("clientes").insert([
         { 
           nombre, 
-          correo,  // ✅ Campo obligatorio
+          correo,  //  Campo obligatorio
           direccion, 
           telefono, 
           latitud, 
@@ -110,7 +110,7 @@ export default function CrearCliente() {
             onChange={(e) => setCorreo(e.target.value)}
             placeholder="correo@ejemplo.com"
             className="border border-gray-300 p-2 rounded w-full focus:ring-2 focus:ring-blue-500"
-            required  // ✅ Campo obligatorio
+            required  //  Campo obligatorio
           />
           <p className="text-xs text-gray-500 mt-1">
             Se usará para enviar reportes de visitas
@@ -151,7 +151,7 @@ export default function CrearCliente() {
             Ubicación en el mapa *
           </label>
           <p className="text-sm text-gray-600 mb-2">
-            👆 Haz clic en el mapa para seleccionar la ubicación del cliente
+             Haz clic en el mapa para seleccionar la ubicación del cliente
           </p>
 
           {/* Mapa */}

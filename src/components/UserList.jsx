@@ -6,21 +6,21 @@ function UserList() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // 🔹 Cargar usuarios al iniciar
+  //  Cargar usuarios al iniciar
   useEffect(() => {
     fetchUsers();
   }, []);
 
-  // 🔹 Obtener lista de usuarios desde el backend
+  //  Obtener lista de usuarios desde el backend
   const fetchUsers = async () => {
     try {
-      const res = await fetch("http://localhost:3001/api/users");
+      const res = await fetch(`${API_URL}/api/users`);
       if (!res.ok) throw new Error("Error al obtener usuarios");
       const data = await res.json();
       setUsers(data);
     } catch (err) {
       console.error(err);
-      toast.error("❌ Error al cargar usuarios");
+      toast.error(" Error al cargar usuarios");
     } finally {
       setLoading(false);
     }
@@ -32,18 +32,18 @@ function UserList() {
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch(`http://localhost:3001/api/delete-user/${id}`, {
+      const res = await fetch(`${API_URL}/api/delete-user/${id}`, {
         method: "DELETE",
       });
       const data = await res.json();
 
       if (!res.ok) throw new Error(data.message);
 
-      toast.success("✅ Usuario eliminado correctamente");
+      toast.success(" Usuario eliminado correctamente");
       fetchUsers(); // recarga lista
     } catch (err) {
       console.error(err);
-      toast.error("❌ Error al eliminar usuario");
+      toast.error(" Error al eliminar usuario");
     }
   };
 

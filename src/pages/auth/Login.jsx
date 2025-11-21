@@ -17,7 +17,7 @@ export default function Login() {
       password,
     })
 
-    if (error) return setMensaje(`❌ ${error.message}`)
+    if (error) return setMensaje(` ${error.message}`)
 
     const user = data.user
 
@@ -29,7 +29,7 @@ export default function Login() {
       .single()
 
     if (perfilError || !perfil) {
-      return setMensaje('❌ No se pudo obtener el rol del usuario')
+      return setMensaje(' No se pudo obtener el rol del usuario')
     }
 
     // Redirigir según el rol
@@ -44,7 +44,7 @@ export default function Login() {
         navigate('/tecnico/dashboard')
         break
       default:
-        setMensaje('⚠️ Rol no reconocido')
+        setMensaje(' Rol no reconocido')
     }
   }
 
