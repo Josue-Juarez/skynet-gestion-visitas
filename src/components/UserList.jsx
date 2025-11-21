@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Pencil, Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
+import { API_URL } from "../config/api";
 
 function UserList() {
   const [users, setUsers] = useState([]);
