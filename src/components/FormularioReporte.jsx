@@ -1,6 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { supabase } from "../lib/supabaseClient";
+import { API_URL } from "../config/api";
 
 export default function FormularioReporte({ 
   visita, 
@@ -49,7 +50,7 @@ export default function FormularioReporte({
       .single();
 
     // 4. Enviar email al cliente mediante el backend
-    const responseEmail = await fetch('http://localhost:3001/api/reportes/enviar-reporte', {
+    const responseEmail = await fetch(`${API_URL}/api/reportes/enviar-reporte`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
