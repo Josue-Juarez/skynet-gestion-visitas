@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { supabase } from "../lib/supabaseClient";
+import { trackEvent } from "../analytics";
 
 export default function CrearVisita() {
   const [clientes, setClientes] = useState([]);
@@ -19,8 +20,8 @@ export default function CrearVisita() {
 
   const fetchClientes = async () => {
     setLoadingData(true);
-    // 🔹 Los clientes ya se filtran automáticamente por RLS
-    // Solo verás los clientes del supervisor logueado
+    //  Los clientes ya se filtran automáticamente por RLS
+    // Solo se ven los clientes del supervisor logueado
     const { data, error } = await supabase
       .from("clientes")
       .select("*")
@@ -36,10 +37,10 @@ export default function CrearVisita() {
   };
 
   const fetchTecnicos = async () => {
-    // 🔹 Obtener solo técnicos activos (rol_id = 3)
+    //  Obtener solo técnicos activos (rol_id = 3)
     const { data, error } = await supabase
       .from("profiles")
-      .select("id, nombre, correo")  // ← CAMBIO: correo en lugar de email
+      .select("id, nombre, correo")  
       .eq("rol_id", 3)
       .order("nombre", { ascending: true });
     
@@ -67,19 +68,19 @@ export default function CrearVisita() {
     setLoading(true);
     
     try {
-      // 🔹 Obtener el usuario actual (supervisor)
+      //  Obtener el usuario actual (supervisor)
       const { data: { user }, error: userError } = await supabase.auth.getUser();
       
       if (userError || !user) {
         throw new Error("No se pudo obtener el usuario actual. Inicia sesión nuevamente.");
       }
 
-      // 🔹 Insertar la visita con supervisor_id
+      //  Insertar la visita con supervisor_id
       const { error } = await supabase.from("visitas").insert([
         {
           cliente_id: clienteId,
           tecnico_id: tecnicoId,
-          supervisor_id: user.id,  // ← Asociar al supervisor
+          supervisor_id: user.id,  // Asociar al supervisor
           fecha,
           descripcion: descripcion || null  // Permitir que sea opcional
         }
@@ -87,9 +88,11 @@ export default function CrearVisita() {
 
       if (error) throw error;
 
+      trackEvent("Visitas", "Crear visita", clientes.find(c => c.id === clienteId)?.nombre);
+
       toast.success("Visita creada correctamente");
 
-      // 🔹 Limpiar campos
+      //  Limpiar campos
       setClienteId("");
       setTecnicoId("");
       setFecha("");

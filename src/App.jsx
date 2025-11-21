@@ -9,6 +9,9 @@ import CrearVisita from "./components/CrearVisita";
 import CrearCliente from "./components/CrearCliente";
 import ClientesList from "./components/ClientesList";
 import TecnicoDashboard from "./pages/dashboard/TecnicoDashboard";
+import { initAnalytics } from "./analytics";
+
+initAnalytics();
 
 
 
