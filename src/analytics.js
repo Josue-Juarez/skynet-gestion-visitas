@@ -6,10 +6,6 @@ export const initAnalytics = () => {
 };
 
 // Función para registrar eventos
-export const trackEvent = (category, action, label) => {
-  ReactGA.event({
-    category,
-    action,
-    label
-  });
+export const trackEvent = (eventName, eventParams = {}) => {
+  ReactGA.event(eventName, eventParams);
 };
