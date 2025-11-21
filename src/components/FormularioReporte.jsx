@@ -2,6 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { supabase } from "../lib/supabaseClient";
 import { API_URL } from "../config/api";
+import { trackEvent } from "../analytics";
 
 export default function FormularioReporte({ 
   visita, 
@@ -33,11 +34,17 @@ export default function FormularioReporte({
 
     if (reporteError) throw reporteError;
 
+    // evento enviar reporte
+    trackEvent("Reportes", "Enviar reporte", visita.cliente?.nombre);
+
     // 2. Cambiar estado de visita a "finalizada"
     const { error: visitaError } = await supabase
       .from("visitas")
       .update({ estado: "finalizada" })
       .eq("id", visita.id);
+
+    // evento finalizar visita
+    trackEvent("Visitas", "Finalizar visita", visita.cliente?.nombre);
 
     if (visitaError) throw visitaError;
 

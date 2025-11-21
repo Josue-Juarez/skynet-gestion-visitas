@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { supabase } from "../lib/supabaseClient";
 import { trackEvent } from "../analytics";
-
 export default function CrearVisita() {
+
   const [clientes, setClientes] = useState([]);
   const [tecnicos, setTecnicos] = useState([]);
   const [clienteId, setClienteId] = useState("");

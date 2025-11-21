@@ -65,7 +65,7 @@ export default function VisitasList() {
       setTecnicos(tecnicosData);
       setVisitas(visitasConNombres);
     } catch (err) {
-      console.error("❌ Error:", err);
+      console.error(" Error:", err);
       toast.error("Error al cargar visitas");
     } finally {
       setLoading(false);
@@ -105,9 +105,11 @@ export default function VisitasList() {
                     {v.estado === "finalizada" && (
                       <button
                         className="px-3 py-1 bg-blue-600 text-white rounded"
-                        onClick={async () => await generarPDFVisita(v)}
-
-                      >
+                        onClick={async () => {
+                          trackEvent("Reportes", "Generar PDF", v.cliente?.nombre);
+                          await generarPDFVisita(v);
+                        }}
+                       >
                         PDF
                       </button>
                     )}
