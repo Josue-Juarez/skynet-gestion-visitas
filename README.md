@@ -1,16 +1,295 @@
-# React + Vite
+**Skynet Gestión de Visitas**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este documento describe la instalación, configuración y ejecución del proyecto **Skynet Gestión de Visitas**, una aplicación web para la gestión de visitas técnicas, seguimiento de actividades, generación de reportes y administración de usuarios.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
+*Descripción del Proyecto**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Skynet Gestión de Visitas es una plataforma desarrollada en **React (Vite + Tailwind)** para el frontend y **Node.js + Express** para el backend. El proyecto utiliza **Supabase** como base de datos y autenticación, además de **Google Analytics** para la medición de eventos.
 
-## Expanding the ESLint configuration
+La aplicación permite:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* Crear, asignar e iniciar visitas técnicas.
+* Registrar detalles, enviar reportes y generar archivos PDF.
+* Administrar usuarios (rol de supervisor y técnico).
+* Visualizar estados de visitas.
+* Medir eventos clave con Google Analytics.
+
+
+
+ **Arquitectura del Sistema**
+
+El sistema está dividido en:
+
+### **Frontend:**
+
+* React + Vite
+* TailwindCSS
+* React
+* React-GA4 (Analytics)
+* Desplegado en **Vercel**
+
+**Backend:**
+
+* Node.js + Express
+* Supabase (base de datos y funciones)
+* Desplegado en **Railway**
+
+---
+
+**Estructura del Proyecto
+
+`*``
+skynet-gestion-visitas/
+├── backend/
+│   ├── node_modules/
+│   ├── routes/
+│   ├── .dockerignore
+│   ├── .env
+│   ├── .gitignore
+│   ├── Dockerfile
+│   ├── index.js
+│   ├── package-lock.json
+│   ├── package.json
+│   └── server.js
+│
+├── frontend/
+│   ├── node_modules/
+│   ├── public/
+│   ├── src/
+│   │   ├── assets/
+│   │   │   └── react.svg
+│   │   ├── components/
+│   │   │   ├── ClientesList.jsx
+│   │   │   ├── CrearCliente.jsx
+│   │   │   ├── CrearVisita.jsx
+│   │   │   ├── FormularioReporte.jsx
+│   │   │   ├── GenerarPdf.jsx
+│   │   │   ├── ProtectedRoute.jsx
+│   │   │   ├── UserList.jsx
+│   │   │   └── VisitasList.jsx
+│   │   ├── config/
+│   │   │   └── api.js
+│   │   ├── lib/
+│   │   │   └── supabaseClient.js
+│   │   ├── pages/
+│   │   │   ├── auth/
+│   │   │   │   ├── Login.jsx
+│   │   │   │   └── Register.jsx
+│   │   │   └── dashboard/
+│   │   │       ├── AdminDashboard.jsx
+│   │   │       ├── CreateUser.jsx
+│   │   │       ├── SupervisorDashboard.jsx
+│   │   │       └── TecnicoDashboard.jsx
+│   │   ├── pdf/
+│   │   │   └── fonts/
+│   │   │       └── vfs_fonts.js
+│   │   ├── analytics.js
+│   │   ├── App.css
+│   │   ├── App.jsx
+│   │   ├── index.css
+│   │   └── main.jsx
+│
+│   ├── .env
+│   ├── .gitignore
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── postcss.config.js
+│   ├── README.md
+│   ├── tailwind.config.js
+│   ├── vercel.json
+│   └── vite.config.js
+│
+├── supabase/
+│   └── (archivos de configuración y migraciones)
+```
+
+---
+
+## ⚙️ **Requisitos Previos**
+
+Antes de instalar y ejecutar el proyecto, asegúrate de tener:
+
+* Node.js 18+
+* NPM o Yarn
+* Cuenta en Supabase
+* Cuenta en Google Analytics
+* (Opcional) Docker Desktop
+
+---
+
+## 🔧 **Instalación del Proyecto**
+
+### **1. Clonar el repositorio**
+
+```bash
+git clone https://github.com/tu_usuario/skynet-gestion-visitas.git
+cd skynet-gestion-visitas
+```
+
+---
+
+### **2. Configurar Frontend**
+
+```bash
+cd frontend
+npm install
+```
+
+#### Crear archivo `.env`
+
+```
+VITE_SUPABASE_URL=tu_url
+VITE_SUPABASE_ANON_KEY=tu_key
+VITE_GOOGLE_MAPS_KEY=tu_key
+VITE_GA_ID=G-XXXXXXXXXX
+```
+
+#### Ejecutar frontend
+
+```bash
+npm run dev
+```
+
+---
+
+### **3. Configurar Backend**
+
+```bash
+cd backend
+npm install
+```
+
+#### Crear archivo `.env`
+
+```
+PORT=3001
+SUPABASE_URL=tu_url
+SUPABASE_SERVICE_KEY=tu_service_key
+```
+
+#### Ejecutar backend
+
+```bash
+node server.js
+```
+
+---
+
+##  **Google Analytics (GA4)**
+
+La aplicación usa **react-ga4**.
+
+### Archivo `analytics.js`
+
+```javascript
+import ReactGA from "react-ga4";
+
+export const initAnalytics = () => {
+  ReactGA.initialize("G-XXXXXXXXXX");
+};
+
+export const trackEvent = (eventName, eventParams = {}) => {
+  ReactGA.event(eventName, eventParams);
+};
+```
+
+### Ejemplo de uso en componentes
+
+```javascript
+trackEvent("crear_visita", { cliente: nombreCliente });
+```
+
+---
+
+##  **Docker (Opcional)**
+
+### Backend
+
+Crear archivo `Dockerfile` en `/backend`:
+
+```dockerfile
+FROM node:18
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+CMD ["node", "server.js"]
+```
+
+Construir imagen:
+
+```bash
+docker build -t skynet-backend .
+```
+
+Ejecutar contenedor:
+
+```bash
+docker run -p 3001:3001 skynet-backend
+```
+
+---
+
+## ☁️ **Despliegue**
+
+### **Frontend en Vercel**
+
+1. Conectar repositorio
+2. Vercel detecta Vite automáticamente
+3. Agregar variables de entorno
+4. Deploy
+
+### **Backend en Railway**
+
+1. Crear proyecto
+2. Subir código directamente desde GitHub
+3. Configurar variables de entorno
+4. Railway asigna URL pública
+
+---
+
+##  **Cómo Ejecutarlo Completo**
+
+### **1. Iniciar backend**
+
+```bash
+cd backend
+node server.js
+```
+
+### **2. Iniciar frontend**
+
+```bash
+cd frontend
+npm run dev
+```
+
+Acceder a:
+
+```
+http://localhost:5173
+```
+
+---
+
+##  **Notas Importantes**
+
+* Google Analytics puede tardar hasta **24–48 horas** en reflejar datos en informes que no sean Tiempo Real.
+* Vercel requiere que TODAS las variables empiecen con `VITE_`.
+* Railway reinicia automáticamente si detecta cambios.
+
+---
+
+##  **Autores**
+
+Proyecto desarrollado por **Josué Juarez** .
+
+---
+
+
+
+---
