@@ -42,7 +42,7 @@ El sistema está dividido en:
 
 ---
 
-## ⚙️ **Requisitos Previos**
+##  **Requisitos Previos**
 
 Antes de instalar y ejecutar el proyecto, asegúrate de tener:
 
@@ -167,7 +167,7 @@ docker run -p 3001:3001 skynet-backend
 
 ---
 
-## ☁️ **Despliegue**
+##  **Despliegue**
 
 ### **Frontend en Vercel**
 
