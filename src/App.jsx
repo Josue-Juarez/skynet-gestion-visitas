@@ -18,13 +18,13 @@ initAnalytics();
 function App() {
   return (
     <Routes>
-      {/* 🔹 Redirigir raíz al login */}
+      {/*  Redirigir raíz al login */}
       <Route path="/" element={<Navigate to="/login" replace />} />
 
-      {/* 🔹 Login público */}
+      {/*  Login público */}
       <Route path="/login" element={<Login />} />
 
-      {/* 🔹 Sección protegida del administrador con subrutas */}
+      {/*  Sección protegida del administrador con subrutas */}
       <Route
         path="/admin"
         element={

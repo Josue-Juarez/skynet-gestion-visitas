@@ -30,7 +30,7 @@ export default function Register() {
         {
           id: user.id,
           nombre: nombre,
-          rol_id: 1, // 👑 Rol 1 = Administrador
+          rol_id: 1, //  Rol 1 = Administrador
         },
       ]);
 
