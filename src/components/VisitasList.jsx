@@ -74,7 +74,7 @@ export default function VisitasList() {
 
   return (
     <div className="bg-white p-6 rounded-xl shadow">
-      <h2 className="text-xl font-bold mb-4">Lista de Visitas</h2>
+      <h2 className="text-xl font-bold mb-4">Reporte de Visitas</h2>
 
       {loading ? (
         <p className="text-gray-500 italic">Cargando visitas...</p>

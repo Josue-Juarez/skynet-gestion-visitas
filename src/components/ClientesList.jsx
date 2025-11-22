@@ -84,7 +84,7 @@ export default function ClientesList() {
               <thead>
                 <tr className="border-b-2 border-gray-300 bg-gray-50">
                   <th className="py-3 px-4 font-semibold text-gray-700">Nombre</th>
-                  <th className="py-3 px-4 font-semibold text-gray-700">Correo</th>  {/* ← AGREGADO */}
+                  <th className="py-3 px-4 font-semibold text-gray-700">Correo</th>  {/*  AGREGADO */}
                   <th className="py-3 px-4 font-semibold text-gray-700">Teléfono</th>
                   <th className="py-3 px-4 font-semibold text-gray-700">Dirección</th>
                   <th className="py-3 px-4 font-semibold text-gray-700">Ubicación</th>
@@ -97,7 +97,7 @@ export default function ClientesList() {
                     <tr key={cliente.id} className="border-b hover:bg-gray-50 transition-colors">
                       <td className="py-3 px-4 font-medium text-gray-800">{cliente.nombre}</td>
                       
-                      {/* ← COLUMNA NUEVA */}
+                      {/*  COLUMNA NUEVA */}
                       <td className="py-3 px-4">
                         <a 
                         >
@@ -124,7 +124,7 @@ export default function ClientesList() {
                                 className="text-blue-600 hover:text-blue-800"
                                 title="Copiar coordenadas"
                               >
-                                📋
+                                
                               </button>
                             </div>
 
@@ -134,13 +134,13 @@ export default function ClientesList() {
                                 onClick={() => comoLlegar(cliente.latitud, cliente.longitud, cliente.nombre)}
                                 className="flex items-center gap-1 bg-green-600 text-white px-3 py-1.5 rounded text-xs hover:bg-green-700 transition-colors font-medium"
                               >
-                                🧭 Cómo llegar
+                                 Cómo llegar
                               </button>
                               <button
                                 onClick={() => verEnMapa(cliente.latitud, cliente.longitud)}
                                 className="flex items-center gap-1 bg-blue-600 text-white px-3 py-1.5 rounded text-xs hover:bg-blue-700 transition-colors font-medium"
                               >
-                                📍 Ver mapa
+                                 Ver mapa
                               </button>
                             </div>
                           </div>
@@ -161,7 +161,7 @@ export default function ClientesList() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="6" className="py-8 text-center text-gray-500 italic">  {/* ← cambié de 5 a 6 columnas */}
+                    <td colSpan="6" className="py-8 text-center text-gray-500 italic">  
                       No hay clientes registrados.
                     </td>
                   </tr>

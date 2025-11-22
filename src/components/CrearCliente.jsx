@@ -43,14 +43,14 @@ export default function CrearCliente() {
     setLoading(true);
     
     try {
-      // 🔹 Obtener el usuario actual (supervisor logueado)
+      //  Obtener el usuario actual (supervisor logueado)
       const { data: { user }, error: userError } = await supabase.auth.getUser();
       
       if (userError || !user) {
         throw new Error("No se pudo obtener el usuario actual. Inicia sesión nuevamente.");
       }
 
-      // 🔹 Insertar cliente con el supervisor_id
+      //  Insertar cliente con el supervisor_id
       const { error } = await supabase.from("clientes").insert([
         { 
           nombre, 
@@ -88,7 +88,7 @@ export default function CrearCliente() {
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Nombre del cliente *
+            Nombre del cliente 
           </label>
           <input
             type="text"
@@ -102,7 +102,7 @@ export default function CrearCliente() {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Correo electrónico *
+            Correo electrónico 
           </label>
           <input
             type="email"
@@ -119,7 +119,7 @@ export default function CrearCliente() {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Dirección *
+            Dirección 
           </label>
           <input
             type="text"
@@ -133,7 +133,7 @@ export default function CrearCliente() {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Teléfono *
+            Teléfono 
           </label>
           <input
             type="tel"
@@ -148,7 +148,7 @@ export default function CrearCliente() {
         {/* Instrucción para el usuario */}
         <div className="pt-4 border-t">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Ubicación en el mapa *
+            Ubicación en el mapa 
           </label>
           <p className="text-sm text-gray-600 mb-2">
              Haz clic en el mapa para seleccionar la ubicación del cliente

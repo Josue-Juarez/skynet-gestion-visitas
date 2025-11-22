@@ -27,7 +27,7 @@ function UserList() {
     }
   };
 
-  // 🔹 Eliminar usuario (desde backend)
+  // Eliminar usuario (desde backend)
   const deleteUser = async (id) => {
     const confirmDelete = confirm("¿Seguro que deseas eliminar este usuario?");
     if (!confirmDelete) return;

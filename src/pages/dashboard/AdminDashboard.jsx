@@ -20,7 +20,7 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-gray-100">
       {/*  Barra superior */}
-      <header className="bg-green-700 text-white p-4 flex justify-between items-center">
+      <header className="bg-blue-700 text-white p-4 flex justify-between items-center">
         <h1 className="text-xl font-bold">Panel del Administrador</h1>
 
         <nav className="flex gap-4 items-center">

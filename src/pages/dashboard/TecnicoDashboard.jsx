@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 import { supabase } from "../../lib/supabaseClient";
 import toast from "react-hot-toast";
-import FormularioReporte from "../../components/FormularioReporte";  // ← IMPORTAR
+import FormularioReporte from "../../components/FormularioReporte";  
 
 const mapContainerStyle = {
   width: "100%",
@@ -183,7 +183,7 @@ export default function TecnicoDashboard() {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* HEADER */}
-      <header className="bg-blue-600 text-white p-4 shadow-md">
+      <header className="bg-blue-700 text-white p-4 shadow-md">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div>
             <h1 className="text-xl font-bold">Panel del Técnico</h1>

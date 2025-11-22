@@ -49,7 +49,7 @@ export default function CrearVisita() {
       console.error("Detalles del error:", error.message);
       toast.error("Error al cargar técnicos");
     } else {
-      console.log("✅ Técnicos cargados:", data);
+      console.log(" Técnicos cargados:", data);
       setTecnicos(data || []);
       
       if (!data || data.length === 0) {
@@ -88,7 +88,7 @@ export default function CrearVisita() {
 
       if (error) throw error;
 
-      //evento
+      {/* Evento */}
       trackEvent("crear_visita", {
         cliente: clientes.find(c => c.id === clienteId)?.nombre
       });
@@ -96,7 +96,7 @@ export default function CrearVisita() {
 
       toast.success("Visita creada correctamente");
 
-      //  Limpiar campos
+      {/* Limpiar campos */}
       setClienteId("");
       setTecnicoId("");
       setFecha("");
@@ -126,7 +126,7 @@ export default function CrearVisita() {
         {/* Selección de Cliente */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Cliente *
+            Cliente 
           </label>
           <select
             value={clienteId}
@@ -147,7 +147,7 @@ export default function CrearVisita() {
           </select>
           {clientes.length === 0 && (
             <p className="text-sm text-amber-600 mt-1">
-              ⚠️ Primero debes crear clientes
+               Primero debes crear clientes
             </p>
           )}
         </div>
@@ -155,7 +155,7 @@ export default function CrearVisita() {
         {/* Selección de Técnico */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Técnico *
+            Técnico 
           </label>
           <select
             value={tecnicoId}
@@ -167,7 +167,7 @@ export default function CrearVisita() {
             {tecnicos.length > 0 ? (
               tecnicos.map(t => (
                 <option key={t.id} value={t.id}>
-                  {t.nombre} {t.correo ? `(${t.correo})` : ''}  {/* ← CAMBIO: correo en lugar de email */}
+                  {t.nombre} {t.correo ? `(${t.correo})` : ''}  {/*  CAMBIO: correo en lugar de email */}
                 </option>
               ))
             ) : (
@@ -176,7 +176,7 @@ export default function CrearVisita() {
           </select>
           {tecnicos.length === 0 && (
             <p className="text-sm text-amber-600 mt-1">
-              ⚠️ No hay técnicos registrados en el sistema
+               No hay técnicos registrados en el sistema
             </p>
           )}
         </div>
@@ -184,7 +184,7 @@ export default function CrearVisita() {
         {/* Fecha y Hora */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Fecha y Hora *
+            Fecha y Hora 
           </label>
           <input
             type="datetime-local"
@@ -198,7 +198,7 @@ export default function CrearVisita() {
         {/* Descripción */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Descripción (opcional)
+            Descripción
           </label>
           <textarea
             value={descripcion}

@@ -23,7 +23,7 @@ export default function FormularioReporte({
   setEnviando(true);
 
   try {
-    // 1. Guardar reporte en la base de datos
+    //  Guardar reporte en la base de datos
     const { error: reporteError } = await supabase
       .from("reportes_visitas")
       .insert([{
@@ -54,7 +54,7 @@ export default function FormularioReporte({
 
     if (visitaError) throw visitaError;
 
-    // 3. Obtener datos del técnico
+    //  Obtener datos del técnico
     const { data: { user } } = await supabase.auth.getUser();
     const { data: tecnico } = await supabase
       .from("profiles")
@@ -62,7 +62,7 @@ export default function FormularioReporte({
       .eq("id", user.id)
       .single();
 
-    // 4. Enviar email al cliente mediante el backend
+    //  Enviar email al cliente mediante el backend
     const responseEmail = await fetch(`${API_URL}/api/reportes/enviar-reporte`, {
       method: 'POST',
       headers: {

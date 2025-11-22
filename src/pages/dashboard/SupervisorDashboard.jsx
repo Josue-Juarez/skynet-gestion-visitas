@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabaseClient";
 import toast from "react-hot-toast";
 
-// 🔹 Componente interno: Tablero de visitas de hoy
+//  Componente interno: Tablero de visitas de hoy
 function VisitasDeHoy() {
   const [visitas, setVisitas] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -78,6 +78,7 @@ function VisitasDeHoy() {
     return () => clearInterval(interval);
   }, []);
 
+  // color de los estados
   const getEstadoColor = (estado) => {
     const colores = {
       pendiente: "bg-yellow-100 text-yellow-800 border-yellow-300",
@@ -103,6 +104,7 @@ function VisitasDeHoy() {
     window.open(url, "_blank");
   };
 
+  //cargando visitas 
   if (loading) {
     return (
       <div className="bg-white p-6 rounded-xl shadow">
@@ -110,7 +112,7 @@ function VisitasDeHoy() {
       </div>
     );
   }
-
+  // Panel visitas programadas para hoy 
   return (
     <div className="space-y-6">
       {/* Título y fecha */}
@@ -163,7 +165,7 @@ function VisitasDeHoy() {
       <div className="bg-white p-6 rounded-xl shadow">
         {visitas.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">📅 No hay visitas programadas para hoy</p>
+            <p className="text-gray-500 text-lg"> No hay visitas programadas para hoy</p>
             <Link 
               to="/supervisor/dashboard/asignar-visita"
               className="mt-4 inline-block px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
@@ -171,6 +173,8 @@ function VisitasDeHoy() {
               Crear Nueva Visita
             </Link>
           </div>
+
+          //Panel de  las visitas 
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full">
@@ -184,6 +188,7 @@ function VisitasDeHoy() {
                   <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Acciones</th>
                 </tr>
               </thead>
+              // fecha programada de la visita
               <tbody>
                 {visitas.map((v) => (
                   <tr key={v.id} className="border-b hover:bg-gray-50 transition-colors">
@@ -202,15 +207,18 @@ function VisitasDeHoy() {
                     <td className="py-3 px-4 text-sm text-gray-600 max-w-xs">
                       {v.clientes?.direccion}
                     </td>
+                    // nombre y correo de visita asiganda a visita
                     <td className="py-3 px-4">
                       <div className="text-sm text-gray-900">{v.profiles?.nombre}</div>
                       <div className="text-xs text-gray-500">{v.profiles?.correo}</div>
                     </td>
+                    // Actualiza el estado de la visita
                     <td className="py-3 px-4">
                       <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border ${getEstadoColor(v.estado)}`}>
                         {getEstadoTexto(v.estado)}
                       </span>
                     </td>
+                    // boton como llegar 
                     <td className="py-3 px-4">
                       {v.clientes?.latitud && v.clientes?.longitud && (
                         <button
@@ -232,7 +240,7 @@ function VisitasDeHoy() {
   );
 }
 
-// 🔹 DASHBOARD PRINCIPAL
+// DASHBOARD PRINCIPAL
 export default function SupervisorDashboard() {
   const location = useLocation();
   const navigate = useNavigate();

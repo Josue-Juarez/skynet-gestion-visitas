@@ -16,7 +16,7 @@ export default function Register() {
     setLoading(true);
 
     try {
-      // 1️⃣ Crear usuario en Auth
+      // 1️ Crear usuario en Auth
       const { data, error: signUpError } = await supabase.auth.signUp({
         email,
         password,
@@ -25,7 +25,7 @@ export default function Register() {
       if (signUpError) throw signUpError;
       const user = data.user;
 
-      // 2️⃣ Insertar perfil en tabla "profiles"
+      // 2️ Insertar perfil en tabla "profiles"
       const { error: insertError } = await supabase.from("profiles").insert([
         {
           id: user.id,
@@ -36,7 +36,7 @@ export default function Register() {
 
       if (insertError) throw insertError;
 
-      alert("✅ Registro exitoso. Ahora puedes iniciar sesión como administrador.");
+      alert(" Registro exitoso. Ahora puedes iniciar sesión como administrador.");
       navigate("/login");
     } catch (err) {
       console.error(err);
