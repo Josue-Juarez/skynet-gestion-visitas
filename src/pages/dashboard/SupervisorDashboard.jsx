@@ -188,7 +188,7 @@ function VisitasDeHoy() {
                   <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Acciones</th>
                 </tr>
               </thead>
-              
+              {/* fecha programada de la visita */}
               <tbody>
                 {visitas.map((v) => (
                   <tr key={v.id} className="border-b hover:bg-gray-50 transition-colors">
@@ -207,18 +207,18 @@ function VisitasDeHoy() {
                     <td className="py-3 px-4 text-sm text-gray-600 max-w-xs">
                       {v.clientes?.direccion}
                     </td>
-                    // nombre y correo de visita asiganda a visita
+                    {/* nombre y correo asiganada a visita*/}
                     <td className="py-3 px-4">
                       <div className="text-sm text-gray-900">{v.profiles?.nombre}</div>
                       <div className="text-xs text-gray-500">{v.profiles?.correo}</div>
                     </td>
-                    // Actualiza el estado de la visita
+                    {/* actualiza el estado de la visita */}
                     <td className="py-3 px-4">
                       <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border ${getEstadoColor(v.estado)}`}>
                         {getEstadoTexto(v.estado)}
                       </span>
                     </td>
-                    // boton como llegar 
+                    {/* boton de como llegar */}
                     <td className="py-3 px-4">
                       {v.clientes?.latitud && v.clientes?.longitud && (
                         <button
