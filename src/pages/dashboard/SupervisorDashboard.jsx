@@ -188,7 +188,7 @@ function VisitasDeHoy() {
                   <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Acciones</th>
                 </tr>
               </thead>
-              // fecha programada de la visita
+              
               <tbody>
                 {visitas.map((v) => (
                   <tr key={v.id} className="border-b hover:bg-gray-50 transition-colors">
